@@ -7,8 +7,9 @@ import 'package:moviex/core/network/result.dart';
 import 'package:moviex/features/account/domain/entities/user.dart';
 import 'package:moviex/features/account/domain/usecases/get_user_usecase.dart';
 
-final userNotifierProvider =
-    AsyncNotifierProvider.autoDispose<UserNotifier, User>(UserNotifier.new);
+final userNotifierProvider = AsyncNotifierProvider<UserNotifier, User>(
+  UserNotifier.new,
+);
 
 class UserNotifier() extends AsyncNotifier<User> {
   @override

@@ -32,7 +32,19 @@ class FavoriteList extends ConsumerWidget {
   }
 
   Widget _buildTitle() {
-    return Text("Избранное", style: AppTextStyles.titleLarge);
+    return Row(
+      spacing: AppSpacing.s16,
+      children: [
+        Expanded(child: Text("Избранное", style: AppTextStyles.titleLarge)),
+        TextButton(
+          onPressed: () {},
+          child: Text(
+            "Посмотреть все",
+            style: AppTextStyles.body.copyWith(color: AppColors.textPrimary),
+          ),
+        ),
+      ],
+    );
   }
 
   Widget _buildListView(List<Movie> data) {

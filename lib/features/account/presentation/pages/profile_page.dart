@@ -3,14 +3,12 @@ import 'package:material_ui/material_ui.dart';
 import 'package:moviex/core/network/failure_exception.dart';
 import 'package:moviex/core/theme/app_theme.dart';
 import 'package:moviex/features/account/domain/entities/user.dart';
+import 'package:moviex/features/account/domain/usecases/get_rated_movies_usecase.dart';
 import 'package:moviex/features/account/presentation/providers/favorites_notifier.dart';
 import 'package:moviex/features/account/presentation/providers/user_provider.dart';
 import 'package:moviex/features/account/presentation/widgets/favorite_list.dart';
 import 'package:moviex/features/account/presentation/widgets/last_rated_movies_list.dart';
 import 'package:moviex/features/account/presentation/widgets/profile_header.dart';
-import 'package:moviex/features/account/presentation/widgets/profile_statistics_widget.dart';
-
-import '../../domain/usecases/get_rated_movies_usecase.dart';
 
 class ProfilePage extends ConsumerWidget {
   const ProfilePage({super.key});
@@ -70,7 +68,6 @@ class ProfilePage extends ConsumerWidget {
           crossAxisAlignment: .stretch,
           children: [
             ProfileHeader(user: data),
-            ProfileStatisticsWidget(),
             FavoriteList(),
             LastRatedMoviesList(),
           ],

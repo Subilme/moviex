@@ -1,22 +1,30 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:moviex/core/theme/app_theme.dart';
 import 'package:moviex/core/utils/string_extension.dart';
 import 'package:moviex/core/widgets/card_widget.dart';
 import 'package:moviex/features/account/domain/entities/user.dart';
+import 'package:moviex/features/account/presentation/providers/favorites_notifier.dart';
 
 class const ProfileHeader({super.key, required this.user})
-    extends StatelessWidget {
+    extends ConsumerWidget {
   final User user;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return CardWidget(
-      child: Row(
-        spacing: 16,
-        crossAxisAlignment: .start,
+      child: Column(
+        spacing: AppSpacing.s16,
         children: [
-          _buildAvatar(),
-          Expanded(child: _buildInfo()),
+          Row(
+            spacing: AppSpacing.s16,
+            crossAxisAlignment: .start,
+            children: [
+              _buildAvatar(),
+              Expanded(child: _buildInfo()),
+            ],
+          ),
+          _buildMovieStatistics(ref),
         ],
       ),
     );
@@ -95,9 +103,47 @@ class const ProfileHeader({super.key, required this.user})
   String _generateCountryLanguageString() {
     final list = [
       if (user.language?.isNotEmpty ?? false)
-        [?user.country?.countryCodeToFlag(), ?user.country].join(" "),
-      ?user.language?.toUpperCase(),
+        [
+          ?user.language?.countryCodeToFlag(),
+          ?user.language?.toUpperCase(),
+        ].join(" "),
+      ?user.country?.toUpperCase(),
     ];
     return list.join(" · ");
+  }
+
+  Widget _buildMovieStatistics(WidgetRef ref) {
+    final favoritesCount =
+        ref.watch(favoritesNotifierProvider).value?.length ?? 0;
+    return Row(
+      spacing: AppSpacing.s24,
+      children: [
+        Row(
+          spacing: AppSpacing.s8,
+          children: [
+            Icon(Icons.favorite, color: AppColors.textSecondary),
+            Text(
+              favoritesCount.toString(),
+              style: AppTextStyles.button,
+              textAlign: .center,
+            ),
+          ],
+        ),
+        Row(
+          spacing: AppSpacing.s8,
+          children: [
+            Icon(Icons.watch_later_outlined, color: AppColors.textSecondary),
+            Text("1", style: AppTextStyles.button, textAlign: .center),
+          ],
+        ),
+        Row(
+          spacing: AppSpacing.s8,
+          children: [
+            Icon(Icons.star, color: AppColors.textSecondary),
+            Text("1", style: AppTextStyles.button, textAlign: .center),
+          ],
+        ),
+      ],
+    );
   }
 }

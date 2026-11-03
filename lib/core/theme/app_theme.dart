@@ -32,6 +32,22 @@ final ThemeData appTheme = ThemeData(
     type: .fixed,
     enableFeedback: false,
   ),
+  tabBarTheme: TabBarThemeData(
+    labelColor: AppColors.textPrimary,
+    // Зазор 8 между сегментами: по 4 с каждой стороны.
+    labelPadding: const EdgeInsets.symmetric(horizontal: 4),
+    indicatorSize: TabBarIndicatorSize.tab,
+    dividerColor: Colors.transparent,
+    dividerHeight: 0,
+    overlayColor: const WidgetStatePropertyAll(Colors.transparent),
+    splashFactory: NoSplash.splashFactory,
+    // Выбранный сегмент — pill-заливка surface (Ui-Kit 3288:1883).
+    indicator: BoxDecoration(
+      color: AppColors.surface,
+      borderRadius: BorderRadius.circular(90),
+    ),
+    unselectedLabelColor: AppColors.textPrimary,
+  ),
 );
 
 abstract final class AppColors {

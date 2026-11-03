@@ -5,7 +5,9 @@ import 'package:moviex/core/network/failures.dart';
 import 'package:moviex/core/network/result.dart';
 import 'package:moviex/features/movies/data/datasources/movie_remote_data_source.dart';
 import 'package:moviex/features/movies/data/models/movie_dto.dart';
+import 'package:moviex/features/movies/data/models/movie_list_dto.dart';
 import 'package:moviex/features/movies/domain/entities/movie.dart';
+import 'package:moviex/features/movies/domain/entities/movie_page.dart';
 import 'package:moviex/features/movies/domain/entities/trending_filter.dart';
 import 'package:moviex/features/movies/domain/repositories/movie_repository.dart';
 
@@ -23,6 +25,19 @@ class MovieRepositoryImpl(this._dataSource) implements MovieRepository {
       final data = await _dataSource.getTrending(filter);
       final entities = data.results.map((dto) => dto.toMovie()).toList();
       return Success(entities);
+    } on DioException catch (e) {
+      return Error(e.toFailure());
+    } catch (e) {
+      return Error(const UnknownFailure());
+    }
+  }
+
+  @override
+  Future<Result<MoviePage>> getPopular({int page = 1}) async {
+    try {
+      final data = await _dataSource.getPopular(page: page);
+      final result = data.toMoviePage();
+      return Success(result);
     } on DioException catch (e) {
       return Error(e.toFailure());
     } catch (e) {

@@ -56,7 +56,7 @@ class _TrendingMoviesSectionState extends ConsumerState<TrendingMoviesSection>
 
   Widget _buildTitle() {
     return Padding(
-      padding: const EdgeInsets.all(AppSpacing.s16),
+      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.s16),
       child: Row(
         spacing: AppSpacing.s16,
         children: [

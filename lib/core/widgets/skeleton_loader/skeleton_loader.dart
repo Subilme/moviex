@@ -54,19 +54,5 @@ class _SkeletonLoaderState extends State<SkeletonLoader>
         );
       },
     );
-
-    return Container(
-      width: widget.width,
-      height: widget.height,
-      decoration: BoxDecoration(
-        borderRadius: widget.borderRadius,
-        gradient: LinearGradient(
-          colors: [Colors.grey[800]!, Colors.grey[700]!, Colors.grey[800]!],
-          stops: const [0.1, 0.5, 0.9],
-          begin: Alignment(-1, -0.3),
-          end: Alignment(1, 0.3),
-        ),
-      ),
-    );
   }
 }

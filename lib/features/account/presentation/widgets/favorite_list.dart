@@ -4,6 +4,7 @@ import 'package:moviex/core/network/failure_exception.dart';
 import 'package:moviex/core/theme/app_theme.dart';
 import 'package:moviex/core/widgets/error_view.dart';
 import 'package:moviex/core/widgets/movie_card.dart';
+import 'package:moviex/core/widgets/skeleton_loader/list_skeleton_loader.dart';
 import 'package:moviex/features/account/presentation/providers/favorites_notifier.dart';
 import 'package:moviex/features/movies/domain/entities/movie.dart';
 
@@ -27,7 +28,7 @@ class FavoriteList extends ConsumerWidget {
             : error.toString();
         return ErrorView(message: errorString);
       },
-      loading: () => const SizedBox(),
+      loading: () => const ListSkeletonLoader(),
     );
   }
 

@@ -8,7 +8,7 @@ import 'package:moviex/features/account/domain/repositories/account_repository.d
 final ratedProvider = FutureProvider.autoDispose<List<RatedMovie>>((
   Ref ref,
 ) async {
-  final usecase = ref.watch(getRatedMoviesUsecaseProvider);
+  final usecase = ref.read(getRatedMoviesUsecaseProvider);
   final result = await usecase();
   return result.when(
     success: (list) => list,

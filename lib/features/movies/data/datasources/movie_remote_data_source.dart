@@ -18,4 +18,10 @@ class MovieRemoteDataSource(this._dio) {
     final response = await _dio.get('trending/movie/${filter.apiValue}');
     return MovieListDto.fromJson(response.data);
   }
+
+  Future<MovieListDto> getPopular({int page = 1}) async {
+    final params = {'page': page, 'language': 'en-US', 'region': 'PT'};
+    final response = await _dio.get('movie/popular', queryParameters: params);
+    return MovieListDto.fromJson(response.data);
+  }
 }

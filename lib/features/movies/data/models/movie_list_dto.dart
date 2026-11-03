@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:moviex/features/movies/data/models/movie_dto.dart';
+import 'package:moviex/features/movies/domain/entities/movie_page.dart';
 
 part 'movie_list_dto.g.dart';
 
@@ -21,4 +22,13 @@ class MovieListDto {
       _$MovieListDtoFromJson(json);
 
   Map<String, dynamic> toJson() => _$MovieListDtoToJson(this);
+}
+
+extension MovieListDtoMapper on MovieListDto {
+  MoviePage toMoviePage() => MoviePage(
+    movies: results.map((e) => e.toMovie()).toList(),
+    page: page,
+    totalPages: totalPages,
+    totalResults: totalResults,
+  );
 }

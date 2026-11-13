@@ -8,7 +8,7 @@ import 'package:moviex/core/widgets/movie_card.dart';
 import 'package:moviex/core/widgets/skeleton_loader/list_skeleton_loader.dart';
 import 'package:moviex/features/movies/domain/entities/movie.dart';
 import 'package:moviex/features/movies/domain/entities/trending_filter.dart';
-import 'package:moviex/features/movies/domain/usecases/get_trending_movies_usecase.dart';
+import 'package:moviex/features/movies/presentation/discover/providers/trending_movies_provider.dart';
 
 class TrendingMoviesSection extends ConsumerStatefulWidget {
   final ValueChanged<int> onMovieTap;

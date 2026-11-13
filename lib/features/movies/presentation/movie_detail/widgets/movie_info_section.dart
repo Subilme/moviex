@@ -40,41 +40,48 @@ class const MovieInfoSection({super.key, required this.movie})
   }
 
   Widget _buildInfoBlock() {
-    final releaseDateString = _getFormattedDate(movie.releaseDate);
-    return Row(
-      spacing: 16,
-      crossAxisAlignment: .end,
+    return Column(
+      spacing: 12,
+      crossAxisAlignment: .start,
       children: [
-        Expanded(
-          child: Column(
-            spacing: 12,
-            crossAxisAlignment: .start,
-            children: [
-              Text("Movie details", style: AppTextStyles.titleLarge),
-              if (releaseDateString != null)
-                _buildInfoItem(title: "Release date", value: releaseDateString),
-              _buildInfoItem(
-                title: "Budget",
-                value: movie.budget.formatMoney(),
+        Text("Movie details", style: AppTextStyles.titleLarge),
+        Row(
+          spacing: 16,
+          crossAxisAlignment: .start,
+          children: [
+            Expanded(
+              child: Column(
+                spacing: 12,
+                crossAxisAlignment: .start,
+                children: [
+                  _buildInfoItem(
+                    title: "Release date",
+                    value: _getFormattedDate(movie.releaseDate),
+                  ),
+                  _buildInfoItem(
+                    title: "Budget",
+                    value: movie.budget.formatMoney(),
+                  ),
+                ],
               ),
-            ],
-          ),
-        ),
-        Expanded(
-          child: Column(
-            spacing: 8,
-            crossAxisAlignment: .start,
-            children: [
-              _buildInfoItem(
-                title: "Runtime",
-                value: "${movie.runtime} minutes",
+            ),
+            Expanded(
+              child: Column(
+                spacing: 8,
+                crossAxisAlignment: .start,
+                children: [
+                  _buildInfoItem(
+                    title: "Runtime",
+                    value: movie.runtime > 0 ? "${movie.runtime} minutes" : "—",
+                  ),
+                  _buildInfoItem(
+                    title: "Revenue",
+                    value: movie.revenue.formatMoney(),
+                  ),
+                ],
               ),
-              _buildInfoItem(
-                title: "Revenue",
-                value: movie.revenue.formatMoney(),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ],
     );
@@ -91,11 +98,11 @@ class const MovieInfoSection({super.key, required this.movie})
     );
   }
 
-  String? _getFormattedDate(String? date) {
-    if (date == null) return null;
+  String _getFormattedDate(String? date) {
+    if (date == null) return "—";
 
     final parsed = DateTime.tryParse(date);
-    if (parsed == null) return null;
+    if (parsed == null) return "—";
     return DateFormat("MMMM dd, yyyy").format(parsed);
   }
 }

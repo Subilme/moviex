@@ -44,4 +44,17 @@ class MovieRepositoryImpl(this._dataSource) implements MovieRepository {
       return Error(const UnknownFailure());
     }
   }
+
+  @override
+  Future<Result<Movie>> getMovieDetails(int movieId) async {
+    try {
+      final data = await _dataSource.getMovieDetails(movieId);
+      final result = data.toMovie();
+      return Success(result);
+    } on DioException catch (e) {
+      return Error(e.toFailure());
+    } catch (e) {
+      return Error(const UnknownFailure());
+    }
+  }
 }

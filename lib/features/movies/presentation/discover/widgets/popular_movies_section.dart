@@ -10,7 +10,9 @@ import 'package:moviex/features/movies/domain/entities/movie.dart';
 import 'package:moviex/features/movies/presentation/discover/providers/popular_movies_notifier.dart';
 
 class PopularMoviesSection extends ConsumerWidget {
-  const PopularMoviesSection({super.key});
+  final ValueChanged<int> onMovieTap;
+
+  const PopularMoviesSection({super.key, required this.onMovieTap});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -51,8 +53,11 @@ class PopularMoviesSection extends ConsumerWidget {
             ? const EmptyStateView(message: "Nothing found")
             : ListView.separated(
                 scrollDirection: .horizontal,
-                itemBuilder: (context, index) =>
-                    MovieCard(movie: data[index], width: 140),
+                itemBuilder: (context, index) => MovieCard(
+                  movie: data[index],
+                  onTap: () => onMovieTap(data[index].id),
+                  width: 140,
+                ),
                 separatorBuilder: (_, _) =>
                     const SizedBox(width: AppSpacing.s12),
                 itemCount: data.length,

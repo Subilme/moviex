@@ -48,6 +48,7 @@ final ThemeData appTheme = ThemeData(
     ),
     unselectedLabelColor: AppColors.textPrimary,
   ),
+  dividerTheme: DividerThemeData(color: AppColors.textSecondary),
 );
 
 abstract final class AppColors {

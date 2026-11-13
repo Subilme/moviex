@@ -14,10 +14,6 @@ final routerProvider = Provider.autoDispose((Ref ref) {
         navigatorKey: GlobalKey<NavigatorState>(debugLabel: 'shellDiscover'),
         routes: [$discoverRoute],
       ),
-      // StatefulShellBranch(
-      //   navigatorKey: GlobalKey<NavigatorState>(debugLabel: 'shellFinance'),
-      //   routes: [$financeRoute],
-      // ),
       StatefulShellBranch(
         navigatorKey: GlobalKey<NavigatorState>(debugLabel: 'shellProfile'),
         routes: [$profileRoute],
@@ -27,7 +23,7 @@ final routerProvider = Provider.autoDispose((Ref ref) {
 
   final GoRouter router = GoRouter(
     initialLocation: const DiscoverRoute().location,
-    routes: [navigationShellRoute],
+    routes: [navigationShellRoute, $movieDetailRoute],
   );
 
   ref.onDispose(router.dispose);

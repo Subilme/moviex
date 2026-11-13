@@ -11,7 +11,9 @@ import 'package:moviex/features/movies/domain/entities/trending_filter.dart';
 import 'package:moviex/features/movies/domain/usecases/get_trending_movies_usecase.dart';
 
 class TrendingMoviesSection extends ConsumerStatefulWidget {
-  const TrendingMoviesSection({super.key});
+  final ValueChanged<int> onMovieTap;
+
+  const TrendingMoviesSection({super.key, required this.onMovieTap});
 
   @override
   ConsumerState<TrendingMoviesSection> createState() =>
@@ -83,8 +85,11 @@ class _TrendingMoviesSectionState extends ConsumerState<TrendingMoviesSection>
             ? const EmptyStateView(message: "Nothing found")
             : ListView.separated(
                 scrollDirection: .horizontal,
-                itemBuilder: (context, index) =>
-                    MovieCard(movie: data[index], width: 140),
+                itemBuilder: (context, index) => MovieCard(
+                  movie: data[index],
+                  onTap: () => widget.onMovieTap(data[index].id),
+                  width: 140,
+                ),
                 separatorBuilder: (_, _) =>
                     const SizedBox(width: AppSpacing.s12),
                 itemCount: data.length,

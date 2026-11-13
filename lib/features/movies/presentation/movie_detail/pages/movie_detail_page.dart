@@ -1,3 +1,4 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
@@ -58,7 +59,7 @@ class _MovieDetailPageState extends ConsumerState<MovieDetailPage> {
           MovieDetailHeader(
             movie: data,
             onTapBack: context.pop,
-            onTapBookmark: () {},
+            onTapBookmark: () => BotToast.showText(text: 'In Progress'),
           ),
           MovieOverview(movie: data),
           MovieDetailActions(movie: data),
